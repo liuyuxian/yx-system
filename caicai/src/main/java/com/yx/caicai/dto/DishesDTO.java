@@ -3,6 +3,7 @@ package com.yx.caicai.dto;
 import java.util.List;
 
 public class DishesDTO {
+    private String dishesId;
     private String dishesName;
     private String dishesDesc;
     private List<MaterialDTO> materialDTOs;
@@ -25,6 +26,14 @@ public class DishesDTO {
 
     public List<MaterialDTO> getMaterialDTOs() {
         return materialDTOs;
+    }
+
+    public String getDishesId() {
+        return dishesId;
+    }
+
+    public void setDishesId(String dishesId) {
+        this.dishesId = dishesId;
     }
 
     public void setMaterialDTOs(List<MaterialDTO> materialDTOs) {

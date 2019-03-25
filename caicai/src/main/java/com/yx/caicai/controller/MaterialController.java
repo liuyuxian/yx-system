@@ -1,13 +1,12 @@
 package com.yx.caicai.controller;
 
 import com.yx.caicai.dto.MaterialDTO;
+import com.yx.caicai.dto.ResponseDTO;
 import com.yx.caicai.mapper.MaterialMapper;
 import com.yx.caicai.service.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,7 +19,16 @@ public class MaterialController {
     private MaterialService materialService;
 
     @GetMapping
-    public List<MaterialDTO> getAll() {
-        return MaterialMapper.getInstance().toDTO(materialService.getAll());
+    public ResponseDTO<List<MaterialDTO>> getAll() {
+        ResponseDTO<List<MaterialDTO>> response = new ResponseDTO<>();
+        response.setData(MaterialMapper.getInstance().toDTO(materialService.getAll()));
+        return response;
+    }
+
+    @PostMapping
+    public ResponseDTO<MaterialDTO> createMaterial(@RequestBody MaterialDTO materialDTO) {
+        ResponseDTO<MaterialDTO> response = new ResponseDTO<>();
+        response.setData(MaterialMapper.getInstance().toDTO(materialService.saveMaterial(materialDTO)));
+        return response;
     }
 }

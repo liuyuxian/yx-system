@@ -16,7 +16,7 @@ public class MenuService {
     private DishesDao dishesDao;
 
     public List<Dishes> getWeeklyMenu() {
-        List<Dishes> menu = dishesDao.findAll();
+        List<Dishes> menu = getAll();
         Collections.shuffle(menu);
         if(menu.size()>=5){
             return menu.subList(0,4);
@@ -24,7 +24,11 @@ public class MenuService {
         return menu;
     }
 
-    public Dishes save(DishesDTO dishesDTO) {
+    public Dishes saveDishes(DishesDTO dishesDTO) {
         return dishesDao.save(DishesMapper.getInstance().toEntity(dishesDTO));
+    }
+
+    public List<Dishes> getAll() {
+        return dishesDao.findAll();
     }
 }

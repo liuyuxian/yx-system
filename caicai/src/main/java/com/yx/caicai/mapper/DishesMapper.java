@@ -2,6 +2,7 @@ package com.yx.caicai.mapper;
 
 import com.yx.caicai.dto.DishesDTO;
 import com.yx.caicai.entity.Dishes;
+import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +17,7 @@ public class DishesMapper {
 
     public DishesDTO toDTO(Dishes dishes) {
         DishesDTO dishesDTO = new DishesDTO();
-        dishesDTO.setDishesDesc(dishes.getDishesDesc());
-        dishesDTO.setMaterialDTOs(MaterialMapper.getInstance().toDTO(dishes.getMaterials()));
-        dishesDTO.setDishesName(dishes.getDishesName());
+        BeanUtils.copyProperties(dishes, dishesDTO);
         return dishesDTO;
     }
 
@@ -35,6 +34,7 @@ public class DishesMapper {
         dishes.setDishesName(dishesDTO.getDishesName());
         dishes.setDishesDesc(dishesDTO.getDishesDesc());
         dishes.setMaterials(MaterialMapper.getInstance().toEntity(dishesDTO.getMaterialDTOs()));
+        dishes.setDishesId(dishesDTO.getDishesId());
         return dishes;
     }
 }

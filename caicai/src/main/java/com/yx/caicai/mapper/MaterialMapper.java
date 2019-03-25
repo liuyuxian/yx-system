@@ -17,8 +17,7 @@ public class MaterialMapper {
 
     public MaterialDTO toDTO(Material material) {
         MaterialDTO materialDTO = new MaterialDTO();
-        materialDTO.setMaterialName(material.getMaterialName());
-        materialDTO.setMaterialId(material.getMaterialId());
+        BeanUtils.copyProperties(material, materialDTO);
         return materialDTO;
     }
 
@@ -33,8 +32,6 @@ public class MaterialMapper {
     public Material toEntity(MaterialDTO materialDTO) {
         Material material = new Material();
         BeanUtils.copyProperties(materialDTO, material);
-//        material.setMaterialId(materialDTO.getMaterialId());
-//        material.setMaterialName(materialDTO.getMaterialName());
         return material;
     }
 
